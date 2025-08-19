@@ -1,3 +1,43 @@
+// ===================================================================
+// AGGRESSIVE DEVTOOLS BLOCKING SCRIPT
+// This section runs immediately to deter F12 / DevTools access.
+// ===================================================================
+
+// --- 1. Block Right-Click (Silently) ---
+document.addEventListener("contextmenu", function (e) {
+  e.preventDefault();
+});
+
+// --- 2. Block all common DevTools shortcuts ---
+document.addEventListener("keydown", function (e) {
+  if (
+    e.key === "F12" || // F12
+    (e.ctrlKey && e.shiftKey && e.key === "I") || // Ctrl+Shift+I
+    (e.ctrlKey && e.shiftKey && e.key === "J") || // Ctrl+Shift+J
+    (e.ctrlKey && e.shiftKey && e.key === "C") || // Ctrl+Shift+C
+    (e.ctrlKey && e.key === "U") // Ctrl+U (View Source)
+  ) {
+    e.preventDefault();
+  }
+});
+
+// --- 3. Extremely aggressive "debugger" loop to freeze DevTools ---
+(function () {
+  setInterval(function () {
+    try {
+      debugger;
+    } catch (err) {}
+  }, 50);
+})();
+
+// --- 4. Add a warning message in the console ---
+const style =
+  "font-size: 20px; font-weight: bold; color: red; background: yellow; padding: 10px; border-radius: 5px;";
+console.log("%cWARNING!", style);
+console.log(
+  "This browser feature is intended for developers. Tampering with the code here can compromise your security or break the site."
+);
+
 document.addEventListener("DOMContentLoaded", function () {
   // --- Header Logic ---
   const header = document.querySelector(".header");
