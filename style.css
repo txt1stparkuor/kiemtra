@@ -445,3 +445,36 @@ nav .mobile-nav-toggle {
     right: auto;
   }
 }
+
+/* nếu mà chiều dài màn hình <= 768px thì thêm các
+ thuộc tính sau đây vào các class ở dưới */
+@media (576px <= width <= 768px) {
+  .content {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+  .content .right-container {
+    order: -1;
+  }
+  .content .left-container {
+    width: 100%;
+  }
+  .about-us {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+  .video-wrap {
+    order: -1;
+  }
+  .footer-content {
+    flex-wrap: wrap;
+  }
+  .footer-content .logo {
+    width: 100%;
+  }
+  .left-container .search-wrap {
+    max-width: 500px;
+  }
+}
